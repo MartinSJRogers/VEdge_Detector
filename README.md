@@ -13,33 +13,39 @@ The VEdge_Detector tool has been trained to differentiate between the coastal ve
 
 ### Instructions for running the VEdge_Detector tool: 
 
-To run this tool, you first need the required python packages in an environment. This tool is best run using the **Spyder** development environment within **Anaconda**- which can be downloaded [here](https://docs.anaconda.com/anaconda/install/). 
+VEdge_Detector is best run using the **Spyder** development environment within **Anaconda**- which can be downloaded [here](https://docs.anaconda.com/anaconda/install/).
 
-To run this tool, first download the repository of files contained within the Vedge_Detector folder of this Github directory onto your computer. It is best to download these files into a new separate folder, e.g. C:/Users/username/Documents/VEdge_Detector
+To run this tool, first download the repository of files contained within this Github directory onto your computer. It is best to download these files into a new separate folder, e.g. C:/Users/username/Documents/VEdge_Detector
 
-This tool is best run using the **Spyder** development environment within **Anaconda**- which can be downloaded [here](https://docs.anaconda.com/anaconda/install/).
+After you have installed Anaconda on your computer and downloaded the file repository, you then need to install the required python packages in an environment. To create an environment, open the Anaconda prompt (or open a terminal window in Mac and Linux) and use the change directory command, `cd`to go the folder where you have downloaded this repository, e.g.:
 
-After you have installed Anaconda on your computer, you then need to install the required python packages in an environment. To create an environment, open the Anaconda prompt (or open a terminal window in Mac and Linux) and use the cd command (change directory) to go the folder where you have downloaded this repository, e.g.:
-
-cd  C:/Users/username/Documents/VEdge_Detector. 
+`cd  C:/Users/username/Documents/VEdge_Detector` 
 
 Then type the following line to create a new environment named VEdge_Detector containing all the necessary packages:
-conda env create -f environment.yml -n VEdge_Detector
+`conda env create -f environment.yml -n VEdge_Detector`
 
 This command installs all the required packages into an environment called VEdge_Detector. 
+
 To activate the new environment, type the following command in Anaconda Prompt: 
-conda activate coastsat
-If these steps have worked correctly, you should see the (VEdge_Detector) in the Anaconda Prompt window before your directory. 
-Running the code:
-Start by opening spyder, which can be found by typing ‘spyder’ in your PC’s search tool. 
-There are two python files you can open and run in spyder: example_Predict.py and ownImage_Predict.py. If you are new to VEdge_Detector, it is suggested that you first open and run example_Predict.py. If you have correctly downloaded all the files from this Github directory and set up the python environment (described above), when you press run in example_Predict.py it will output the predicted coastal vegetation edge location from an image of Covehithe, Suffolk, UK. The output image will be saved in the same directory. 
+`conda activate VEdge_Detector`
+
+If these steps have worked correctly, you should see the text (VEdge_Detector) in the Anaconda Prompt window before your directory. 
+
+##Running the code:
+Start by opening **spyder**, which can be found by typing ‘spyder’ in your PC’s search tool. 
+
+There are two python files you can open and run in spyder: **example_Predict.py** and **ownImage_Predict.py**. If you are new to VEdge_Detector, it is recommended that you first open and run example_Predict.py. If you have correctly downloaded the file repository from this Github directory and set up the python environment (steps explained above), when you press run in it will output the predicted coastal vegetation edge location from an image of Covehithe, Suffolk, UK. The output image will be saved in the same directory. 
+
 There are three parameters you can change in the file: 
--	Image_Name This is the image you want the VEdge_Detector tool to detect the coastal vegetation edge in. There are three other example images which are contained within the example_Images folder of this directory. Ensure the image filename is perfectly written, otherwise it will cause an error. If you want to use your own image, use the ownImage_Predict.py file- discussed below. 
--	Output_Image- This states whether you want to save the image to your directory or not. This variable can either take the value ‘yes’ or ‘no’ (all lower case). If you put in any other value the image will not be saved. 
--	Output_Image_Name- add the output filename in quotation marks “filename.tif” or apostrophes ‘fileName.tif’. It is important you also include the file type e.g. .tif, otherwise the file will not save.  
-Instructions for ownImage_Predict.py
-If you are using your own image, ensure that it is a .tif file and refer to the image specification section which outlines considerations for the image you use.
-On top of the variable names described above, this file contains additional parameters which you can change the value of:
+-	`Image_Name` This is the image you want the VEdge_Detector tool to detect the coastal vegetation edge in. There are three other example images which are contained within the example_Images folder of this directory. Ensure the image filename is perfectly written, otherwise it will cause an error. If you want to use your own image, use the ownImage_Predict.py file. Addiitonal instructions for using this file are outlined in the section below. 
+-	`Output_Image`- This states whether you want to save the image to your directory or not. This variable can either take the value ‘yes’ or ‘no’ (all lower case). 
+-	`Output_Image_Name`- The user-defined filename for the output image. The filename must be placed in quotation marks e.g. “filename.tif” or apostrophes e.g. ‘fileName.tif’. It is important you also include the file extension type, .tif, otherwise the file will not save. 
+
+##Additional instructions if using your own image
+If you are using your own image, ensure that it is a .tif file and refer to the **image specification** section below which outlines considerations for the image you use.
+In addition to the variable names described above, this file contains an additional parameter which you can change the value of:
+
+-`Image type`- This variable defines what satellite the image was captured from and can take three values: **'planet'**, **'landsat'** or **'sentinel-2'** (all lower case). As discussed in the image specification section below, this tool was trained using exclusively Planet Imagery. In some circumstances, this tool can work on Landsat and Sentinel-2 imagery, although work is still ongoing to make the tool more robust to detecting the coastal vegetation edge position in these images. 
 
 
 
