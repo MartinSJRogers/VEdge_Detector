@@ -20,11 +20,11 @@ To run this tool, you first need the required python packages in an environment.
 ### Image specification
 
 The VEdge_Detector tool has been designed to perform best on:
-•	Images of sandy/shingle coastlines 
-•	Haze and cloud-free image. The tool can perform well on some images where clouds not located over or in the immediate vicinity of the coastal vegetation edge
-•	Images of coastlines with a continuous vegetation edge. The tool has previously detected the seaward boundary of urban land covers or inland waterbodies in some images, but this is not guaranteed in all images.
-•	Images with an equal width and height (in number of pixels), and on images which do not contain any No Data or NAN values around its border. It is advised that you initially crop your image if it does not meet these requirements. 
-•	Images with a minimum of size of 480*480 pixels and a maximum size of xxxx. The tool can detect the vegetation edges in larger images, but performance may be compromised and the edge may be blurred. 
+- Images of sandy/shingle coastlines 
+- Haze and cloud-free image. The tool can perform well on some images where clouds not located over or in the immediate vicinity of the coastal vegetation edge
+- Images of coastlines with a continuous vegetation edge. The tool has previously detected the seaward boundary of urban land covers or inland waterbodies in some images, but this is not guaranteed in all images.
+- Images with an equal width and height (in number of pixels), and on images which do not contain any No Data or NAN values around its border. It is advised that you initially crop your image if it does not meet these requirements. 
+- Images with a minimum of size of 480*480 pixels and a maximum size of xxxx. The tool can detect the vegetation edges in larger images, but performance may be compromised and the edge may be blurred. 
 
 The VEdge_Detector tool was trained using Planet 3 – 5 m spatial resolution imagery. It has also detected vegetation edges in Landsat and Copernicus imagery, although performance is not guaranteed. The tool cannot detect the vegetation edge in aerial imagery. 
 
