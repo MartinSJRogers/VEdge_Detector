@@ -5,13 +5,13 @@ VEdge_Detector is a python-based tool for the automated detection of coastal veg
 
 ![alt text](https://github.com/MartinSJRogers/VEdge_Detector/blob/main/example_Images.png) 
 
-### 2. Background description
+## 2. Background description
 
 Recent advances in remote sensing imagery availability and spatial resolution is providing new opportunities for the rapid, cost-effective detection of a shoreline’s location and its change over time. VEdge_Detector has been developed by training a convolutional neural network to identify coastal vegetation edges in c.30,000 remote sensing images of coastal areas. Further details of how the model has been trained and developed is outlined in the publications by Rogers et al. (2021). 
 
 The VEdge_Detector tool has been trained to differentiate between the coastal vegetation edge and other boundaries in a remote sensing image. This semantic information means the tool can discard other boundaries, including most inland field edges and other urban features. 
 
-### 3. Instructions for running the VEdge_Detector tool: 
+## 3. Instructions for running the VEdge_Detector tool: 
 
 VEdge_Detector is best run using the **Spyder** development environment within **Anaconda**- which can be downloaded [here](https://docs.anaconda.com/anaconda/install/).
 
@@ -54,7 +54,7 @@ There are three parameters you can change in the file:
 If you are using your own image, ensure that it is a .tif file and refer to the **image specification** section below which outlines considerations for the image you use.
 In addition to the variable names described above, this file contains an additional parameter which you can change the value of:
 
--`Image type`- This variable defines what satellite the image was captured from and can take three values: **'planet'**, **'landsat'** or **'sentinel-2'** (all lower case). As discussed in the image specification section below, this tool was trained using exclusively Planet Imagery. In some circumstances, this tool can work on Landsat and Sentinel-2 imagery, although work is still ongoing to make the tool more robust to detecting the coastal vegetation edge position in these images. 
+- `Image type`- This variable defines what satellite the image was captured from and can take three values: **'planet'**, **'landsat'** or **'sentinel-2'** (all lower case). As discussed in the image specification section below, this tool was trained using exclusively Planet Imagery. In some circumstances, this tool can work on Landsat and Sentinel-2 imagery, although work is still ongoing to make the tool more robust to detecting the coastal vegetation edge position in these images. 
 
 
 
