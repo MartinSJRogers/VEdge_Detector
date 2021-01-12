@@ -7,13 +7,40 @@ VEdge_Detector is a python-based tool for the automated detection of coastal veg
 
 ### Background description
 
-Recent advances in remote sensing imagery availability and spatial resolution is providing new opportunities for the rapid, cost-effective detection of a shoreline’s location and its change over time. VEdge_Detector has been developed by training a convolutional neural network to identify coastal vegetation edges in c.30,000 remote sensing images of coastal areas. Further details of how the model has been trained and developed is outlined in the following publication: 
+Recent advances in remote sensing imagery availability and spatial resolution is providing new opportunities for the rapid, cost-effective detection of a shoreline’s location and its change over time. VEdge_Detector has been developed by training a convolutional neural network to identify coastal vegetation edges in c.30,000 remote sensing images of coastal areas. Further details of how the model has been trained and developed is outlined in the publications by Rogers et al. (2021). 
 
-The VEdge_Detector tool has been trained to differentiate between the coastal vegetation edge and other boundaries in a remote sensing image, including inland field edges and urban features. 
+The VEdge_Detector tool has been trained to differentiate between the coastal vegetation edge and other boundaries in a remote sensing image. This semantic information means the tool can discard other boundaries, including most inland field edges and other urban features. 
 
 ### Instructions for running the VEdge_Detector tool: 
 
 To run this tool, you first need the required python packages in an environment. This tool is best run using the **Spyder** development environment within **Anaconda**- which can be downloaded [here](https://docs.anaconda.com/anaconda/install/). 
+
+To run this tool, first download the repository of files contained within the Vedge_Detector folder of this Github directory onto your computer. It is best to download these files into a new separate folder, e.g. C:/Users/username/Documents/VEdge_Detector
+
+This tool is best run using the **Spyder** development environment within **Anaconda**- which can be downloaded [here](https://docs.anaconda.com/anaconda/install/).
+
+After you have installed Anaconda on your computer, you then need to install the required python packages in an environment. To create an environment, open the Anaconda prompt (or open a terminal window in Mac and Linux) and use the cd command (change directory) to go the folder where you have downloaded this repository, e.g.:
+
+cd  C:/Users/username/Documents/VEdge_Detector. 
+
+Then type the following line to create a new environment named VEdge_Detector containing all the necessary packages:
+conda env create -f environment.yml -n VEdge_Detector
+
+This command installs all the required packages into an environment called VEdge_Detector. 
+To activate the new environment, type the following command in Anaconda Prompt: 
+conda activate coastsat
+If these steps have worked correctly, you should see the (VEdge_Detector) in the Anaconda Prompt window before your directory. 
+Running the code:
+Start by opening spyder, which can be found by typing ‘spyder’ in your PC’s search tool. 
+There are two python files you can open and run in spyder: example_Predict.py and ownImage_Predict.py. If you are new to VEdge_Detector, it is suggested that you first open and run example_Predict.py. If you have correctly downloaded all the files from this Github directory and set up the python environment (described above), when you press run in example_Predict.py it will output the predicted coastal vegetation edge location from an image of Covehithe, Suffolk, UK. The output image will be saved in the same directory. 
+There are three parameters you can change in the file: 
+-	Image_Name This is the image you want the VEdge_Detector tool to detect the coastal vegetation edge in. There are three other example images which are contained within the example_Images folder of this directory. Ensure the image filename is perfectly written, otherwise it will cause an error. If you want to use your own image, use the ownImage_Predict.py file- discussed below. 
+-	Output_Image- This states whether you want to save the image to your directory or not. This variable can either take the value ‘yes’ or ‘no’ (all lower case). If you put in any other value the image will not be saved. 
+-	Output_Image_Name- add the output filename in quotation marks “filename.tif” or apostrophes ‘fileName.tif’. It is important you also include the file type e.g. .tif, otherwise the file will not save.  
+Instructions for ownImage_Predict.py
+If you are using your own image, ensure that it is a .tif file and refer to the image specification section which outlines considerations for the image you use.
+On top of the variable names described above, this file contains additional parameters which you can change the value of:
+
 
 
 
@@ -21,9 +48,9 @@ To run this tool, you first need the required python packages in an environment.
 
 The VEdge_Detector tool has been designed to perform best on:
 - Images of sandy/shingle coastlines 
-- Haze and cloud-free image. The tool can perform well on some images where clouds not located over or in the immediate vicinity of the coastal vegetation edge
-- Images of coastlines with a continuous vegetation edge. The tool has previously detected the seaward boundary of urban land covers or inland waterbodies in some images, but this is not guaranteed in all images.
-- Images with an equal width and height (in number of pixels), and on images which do not contain any No Data or NAN values around its border. It is advised that you initially crop your image if it does not meet these requirements. 
+- Haze and cloud-free images. The tool may detect the coastal vegetation edge in some images where clouds are not located over or in the immediate vicinity of the coastal vegetation edge
+- Images of coastlines with a continuous vegetation edge. The tool has previously also detected the seaward boundary of urban land covers or inland waterbodies in some images, but this is not guaranteed in all images.
+- Images with an equal width and height (in number of pixels), and images which do not contain any No Data or NAN values around its border. It is advised that you initially crop your image if it does not meet these requirements. 
 - Images with a minimum of size of 480*480 pixels and a maximum size of xxxx. The tool can detect the vegetation edges in larger images, but performance may be compromised and the edge may be blurred. 
 
 The VEdge_Detector tool was trained using Planet 3 – 5 m spatial resolution imagery. It has also detected vegetation edges in Landsat and Copernicus imagery, although performance is not guaranteed. The tool cannot detect the vegetation edge in aerial imagery. 
