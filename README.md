@@ -22,7 +22,7 @@ To run this tool, first download the repository of files contained within this G
 After you have installed Anaconda on your computer and downloaded the file repository, you then need to install the required python packages in an environment. To create an environment, open the Anaconda prompt (or open a terminal window in Mac and Linux) and use the change directory command, `cd`to go the folder where you have downloaded this repository, e.g.:
 
 ```
-cd  C:/Users/username/Documents/VEdge_Detector` 
+cd  C:/Users/username/Documents/VEdge_Detector 
 ```
 
 Then type the following line to create a new environment named VEdge_Detector containing all the necessary packages:
@@ -36,7 +36,7 @@ This command installs all the required packages into an environment called VEdge
 To activate the new environment, type the following command in Anaconda Prompt: 
 
 ```
-conda activate VEdge_Detector`
+conda activate VEdge_Detector
 ```
 
 If these steps have worked correctly, you should see the text (VEdge_Detector) in the Anaconda Prompt window before your directory. 
