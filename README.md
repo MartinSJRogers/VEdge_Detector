@@ -42,7 +42,9 @@ conda activate VEdge_Detector
 If these steps have worked correctly, you should see the text (VEdge_Detector) in the Anaconda Prompt window before your directory. 
 
 ### 3.2. Running the code
-Start by opening **Anaconda**, which can be found by typing ‘Anaconda’ into your PC’s search tool. 
+Start by opening **Anaconda**, which can be found by typing ‘Anaconda’ into your PC’s search tool. In the top right hand corner click on the 'Environments' tab (1). Then within that tab select the VEdge_Detector environment (2). Finally click on the 'Home' tab and then launch the spyder development environment (3)- see picture below. 
+
+![alt text](https://github.com/MartinSJRogers/VEdge_Detector/blob/main/example_Images.png) 
 
 There are two python files you can open and run in spyder: **example_Predict.py** and **ownImage_Predict.py**. If you are new to VEdge_Detector, it is recommended that you first open and run example_Predict.py. If you have correctly downloaded the file repository from this Github directory and set up the python environment (steps explained above), when you press run in it will output the predicted coastal vegetation edge location from an image of Covehithe, Suffolk, UK. The output image will be saved in the same directory. 
 
