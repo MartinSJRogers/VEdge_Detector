@@ -1,13 +1,13 @@
 # VEdge_Detector
 ## 1. Introduction: A tool for automatic coastal vegetation edge detection
 
-VEdge_Detector is a python-based tool for the automated detection of coastal vegetation edges in remote sensing imagery. The tool produces a heatmap, showing the pixels predicted with the highest confidence as being the vegetation line. The images below show the outputs produced by the VEdge_Detector tool in A. Covehithe, Suffolk. United Kingdom; B. Wilk auf Föhr, Germany and C. Varela, Guinea Bissau. 
+VEdge_Detector is a python-based tool for the automated detection of coastal vegetation edges in remote sensing imagery. The tool produces a heatmap, showing the pixels predicted with the highest confidence as being the vegetation line. The images below show the outputs produced by the VEdge_Detector tool in A) Suffolk, United Kingdom; B) Wilk auf Föhr, Germany and C) Varela, Guinea Bissau. 
 
 ![alt text](https://github.com/MartinSJRogers/VEdge_Detector/blob/main/example_Images.png) 
 
 ## 2. Background description
 
-Recent advances in remote sensing imagery availability and spatial resolution is providing new opportunities for the rapid, cost-effective detection of a shoreline’s location and its change over time. VEdge_Detector has been developed by training a convolutional neural network to identify coastal vegetation edges in c.30,000 remote sensing images of coastal areas. Further details of how the model has been trained and developed is outlined in the publications by Rogers et al. (2021). 
+Recent advances in satellite imagery availability and spatial resolution is providing new opportunities for the rapid, cost-effective detection of a shoreline’s location and dynamics. VEdge_Detector has been developed by training a convolutional neural network to identify coastal vegetation edges in c.30,000 satellite images. Further details of how the model has been trained and developed is outlined in the publication by Rogers et al. (2021). 
 
 The VEdge_Detector tool has been trained to differentiate between the coastal vegetation edge and other boundaries in a remote sensing image. This semantic information means the tool can discard other boundaries, including most inland field edges and other urban features. 
 
@@ -19,7 +19,7 @@ VEdge_Detector is best run using the **Spyder** development environment within *
 
 To run this tool, first download the repository of files contained within this Github directory onto your computer. It is best to download these files into a new separate folder, e.g. C:/Users/username/Documents/VEdge_Detector
 
-After you have installed Anaconda on your computer and downloaded the file repository, you then need to install the required python packages in an environment. To create an environment, open the Anaconda prompt (or open a terminal window in Mac and Linux) and use the change directory command, `cd`to go the folder where you have downloaded this repository, e.g.:
+After you have installed Anaconda onto your computer and downloaded the file repository, you then need to install the required python packages in an environment. To create an environment, open the Anaconda prompt (or open a terminal window in Mac and Linux) and use the change directory command, `cd` to go the folder where you have downloaded this repository, e.g.:
 
 ```
 cd  C:/Users/username/Documents/VEdge_Detector 
@@ -28,7 +28,7 @@ cd  C:/Users/username/Documents/VEdge_Detector
 Then type the following line to create a new environment named VEdge_Detector containing all the necessary packages:
 
 ```
-conda env create -f environment.yml -n VEdge_Detector`
+conda env create -f environment.yml -n VEdge_Detector
 ```
 
 This command installs all the required packages into an environment called VEdge_Detector. 
@@ -42,7 +42,7 @@ conda activate VEdge_Detector
 If these steps have worked correctly, you should see the text (VEdge_Detector) in the Anaconda Prompt window before your directory. 
 
 ### 3.2. Running the code
-Start by opening **spyder**, which can be found by typing ‘spyder’ in your PC’s search tool. 
+Start by opening **Anaconda**, which can be found by typing ‘Anaconda’ into your PC’s search tool. 
 
 There are two python files you can open and run in spyder: **example_Predict.py** and **ownImage_Predict.py**. If you are new to VEdge_Detector, it is recommended that you first open and run example_Predict.py. If you have correctly downloaded the file repository from this Github directory and set up the python environment (steps explained above), when you press run in it will output the predicted coastal vegetation edge location from an image of Covehithe, Suffolk, UK. The output image will be saved in the same directory. 
 
