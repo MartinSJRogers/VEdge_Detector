@@ -12,31 +12,30 @@ import skimage.transform
 #Image to run through VEdge_Detector tool
 testImage= "bribie_island.tif"
 #State whether to save the output image to your directory. Values: 'yes' or 'no'
-Export_Image= 'no'
+Export_Image= 'yes'
 #Define output image name. Image is placed in same directory as input images.
 #All names must finish with '.tif' e.g 'output.tif'
-Output_Image_Name= 'bribie_output.tif'
+Output_Image_Name= 'bribie_output2.tif'
 
 ##############################################################################
 ######################Do not change code under this line #####################
 ##############################################################################
 
-###CNN model and weights#####
-#model_fp="C:/Users/msjr2/Documents/Cambridge/hpc/ModelgdalGRNIR.json"  
-#weights_fn = "C:/Users/msjr2/Documents/Cambridge/hpc/weights-advancementsgdalGRNIR11-64-0.00.hdf5"
-model_fp="C:/Users/msjr2/Documents/Cambridge/machineLearning/firstPythons/Keras_HED/checkpoints/HEDSeg/Modelpython38.json"
-weights_fn="C:/Users/msjr2/Documents/Cambridge/hpc/weightAdvancements/weights-advancementsMarch-02-0.26.hdf5"
-
-
+#Get directory name
 import os
 currentFile=os.path.abspath(__file__).replace("\\","/")
-print(currentFile)
 directory_name= currentFile.rsplit('/',1)[0]
-print(directory_name)
+higher_dir=currentFile.rsplit('/',2)[0]
 
+###CNN model and weights file#####
+#model_fp=str(higher_dir)+ "/model/Model.json" 
+#weights_fn=str(higher_dir)+ "/model/weights.hdf5" 
+model_fp=str(higher_dir)+ "/model/Model38.json" 
+weights_fn=str(higher_dir)+ "/model/weights38.hdf5" 
 
+#Image file
 testImage=str(directory_name) + '/' + str(testImage) 
-print(str(testImage))
+
 #Open image and rearrange raster bands
 rawImage=gdal.Open(testImage)
 bandCount=rawImage.RasterCount
@@ -68,7 +67,6 @@ if bandCount>1:
     print('Side outputs')
     for imgs in pred:
         np.squeeze(imgs, axis=0)
-        show(imgs)
     
     outArray=pred[0]
     outArray=np.squeeze(outArray, axis=0)
