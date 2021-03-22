@@ -29,8 +29,6 @@ directory_name= currentFile.rsplit('/',1)[0]
 higher_dir=currentFile.rsplit('/',2)[0]
 
 ###CNN model and weights file#####
-#model_fp=str(higher_dir)+ "/model/Model.json" 
-#weights_fn=str(higher_dir)+ "/model/weights.hdf5" 
 model_fp=str(higher_dir)+ "/model/Model38.json" 
 weights_fn=str(higher_dir)+ "/model/weights38.hdf5" 
 
