@@ -10,7 +10,7 @@ import skimage.transform
 
 ########Parameters you can alter##############
 #Image to run through VEdge_Detector tool. 
-#Select from: "dunwich.tif", "winterton.tif", "wilk_auf_fohr.tif" or "bribie_island.tif"
+#Select from: "dunwich.tif", "winterton.tif" or "bribie_island.tif"
 testImage= "bribie_island.tif"
 #State whether to save the output image to your directory. Values: 'yes' or 'no'
 Export_Image= 'yes'
