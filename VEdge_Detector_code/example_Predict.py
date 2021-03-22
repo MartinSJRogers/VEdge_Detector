@@ -29,8 +29,8 @@ directory_name= currentFile.rsplit('/',1)[0]
 higher_dir=currentFile.rsplit('/',2)[0]
 
 ###CNN model and weights file#####
-model_fp=str(higher_dir)+ "/model/Model38.json" 
-weights_fn=str(higher_dir)+ "/model/weights38.hdf5" 
+model_fp=str(higher_dir)+ "/model/Model_VedgeDetector.json" 
+weights_fn=str(higher_dir)+ "/model/weights_VEdgeDetector.hdf5" 
 
 #Image file
 testImage=str(directory_name) + '/' + str(testImage) 
@@ -67,7 +67,7 @@ if bandCount>1:
     for imgs in pred:
         np.squeeze(imgs, axis=0)
     
-    outArray=pred[0]
+    outArray=pred[5]
     outArray=np.squeeze(outArray, axis=0)
     outArray=np.squeeze(outArray, axis=2)
     imOut=Image.fromarray(outArray)
