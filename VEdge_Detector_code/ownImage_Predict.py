@@ -15,7 +15,7 @@ testImage= "bribie_island.tif"
 Export_Image= 'yes'
 #Define output image name. Image is placed in same directory as input images.
 #All names must finish with '.tif' e.g 'output.tif'
-Output_Image_Name= 'bribie_output3.tif'
+Output_Image_Name= 'bribie_output.tif'
 #Select whether your image is 'Landsat', 'Sentinel-2' or 'Planet'
 Image_type="Planet"
 
@@ -74,6 +74,7 @@ print("Loaded model from disk")
 pred = loaded_model.predict(image)
 for imgs in pred:
     np.squeeze(imgs, axis=0)
+    show(imgs)
 
 outArray=pred[5]
 outArray=np.squeeze(outArray, axis=0)
