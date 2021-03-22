@@ -1,7 +1,7 @@
 # Python modules to import
 import gdal
 import tensorflow as tf
-from tensorflow.keras.models import model_from_json
+from keras.models import model_from_json
 import numpy as np
 from PIL import Image
 from rasterio.plot import show
@@ -9,13 +9,14 @@ import rasterio
 import skimage.transform
 
 ########Parameters you can alter##############
-#Image to run through VEdge_Detector tool
+#Image to run through VEdge_Detector tool. 
+#Select from: "dunwich.tif", "winterton.tif", "wilk_auf_fohr.tif" or "bribie_island.tif"
 testImage= "bribie_island.tif"
 #State whether to save the output image to your directory. Values: 'yes' or 'no'
 Export_Image= 'yes'
 #Define output image name. Image is placed in same directory as input images.
 #All names must finish with '.tif' e.g 'output.tif'
-Output_Image_Name= 'bribie_output2.tif'
+Output_Image_Name= 'bribie_output.tif'
 
 ##############################################################################
 ######################Do not change code under this line #####################
