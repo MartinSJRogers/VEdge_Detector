@@ -7,7 +7,7 @@ VEdge_Detector is a python-based tool for the automated detection of coastal veg
 
 ## 2. Background description
 
-Recent advances in satellite imagery availability and spatial resolution is providing new opportunities for the rapid, cost-effective detection of a shoreline’s location and dynamics. VEdge_Detector has been developed by training a convolutional neural network to identify coastal vegetation edges in c.30,000 satellite images. Further details of how the model has been trained and developed is outlined in the publication by Rogers et al. (2021). 
+Recent advances in satellite imagery availability and spatial resolution is providing new opportunities for the rapid, cost-effective detection of a shoreline’s location and dynamics. VEdge_Detector has been developed by training a convolutional neural network to identify coastal vegetation edges in c.30,000 satellite images. Further details of how the model has been trained and developed is outlined in the publication by [Rogers et al. (2021).](https://www.tandfonline.com/doi/abs/10.1080/01431161.2021.1897185?journalCode=tres20)  
 
 The VEdge_Detector tool has been trained to differentiate between the coastal vegetation edge and other boundaries in a remote sensing image. This semantic information means the tool can discard other boundaries, including most inland field edges and other urban features. 
 
