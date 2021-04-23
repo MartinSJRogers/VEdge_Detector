@@ -17,7 +17,7 @@ The VEdge_Detector tool has been trained to differentiate between the coastal ve
 
 VEdge_Detector is best run using the **Spyder** development environment within **Anaconda**- which can be downloaded [here](https://docs.anaconda.com/anaconda/install/).
 
-To run this tool, first download the repository of files contained within this Github directory onto your computer. It is best to download these files into a new separate folder, e.g. C:/Users/username/Documents/VEdge_Detector
+To run this tool, first download the repository of files contained within this Github directory onto your computer (using the green 'Code' buttton at the top of the page). It is best to download these files into a new separate folder, e.g. C:/Users/username/Documents/VEdge_Detector
 
 After you have installed Anaconda onto your computer and downloaded the file repository, you then need to install the required python packages in an environment. To create an environment, open the Anaconda prompt (or open a terminal window in Mac and Linux) and use the change directory command, `cd` to go the folder where you have downloaded this repository, e.g.:
 
