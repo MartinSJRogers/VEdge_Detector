@@ -38,9 +38,11 @@ class vedge_detector:
         loaded_model_json = json_file.read()
         json_file.close()
         loaded_model = model_from_json(loaded_model_json)
-        print(os.path.join(self.temp_dir,'model.hdf5'))
-        loaded_model.load_weights(os.path.join(self.temp_dir,'model.hdf5'))
-        return loaded_model
+        if os.path.isfile(os.path.join(self.temp_dir,'model.hdf5')) and os.access(os.path.join(self.temp_dir,'model.hdf5'), os.R_OK):
+            loaded_model.load_weights(os.path.join(self.temp_dir,'model.hdf5'))
+            return loaded_model
+        else:
+            print("Either file is missing or is not readable")
 
     def predict(self, image: np.ndarray) -> np.ndarray:
 
