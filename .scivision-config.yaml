@@ -1,9 +1,9 @@
 name: test
 url: https://github.com/acocac/VEdge_Detector.git
 import: vedge_detector
-model: MapReader_model
+model: vedge_detector
 args: None
 prediction_fn:
     call: predict
     args:
-        X: path2images
+        X: image
