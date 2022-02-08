@@ -38,6 +38,7 @@ class vedge_detector:
         loaded_model_json = json_file.read()
         json_file.close()
         loaded_model = model_from_json(loaded_model_json)
+        print(os.path.join(self.temp_dir,'model.hdf5'))
         loaded_model.load_weights(os.path.join(self.temp_dir,'model.hdf5'))
         return loaded_model
 
