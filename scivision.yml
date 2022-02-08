@@ -11,4 +11,4 @@ sources:
           - bribie_island
           - winterton
     args:
-      urlpath: "https://raw.githubusercontent.com/MartinSJRogers/VEdge_Detector/main/data/{{sample_image}}.tif"
+      urlpath: "https://raw.githubusercontent.com/MartinSJRogers/VEdge_Detector/main/VEdge_Detector_code/{{sample_image}}.tif"
