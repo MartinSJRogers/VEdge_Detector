@@ -1,0 +1,14 @@
+sources:
+  sample_image:
+    driver: intake_xarray.image.ImageSource
+    parameters:
+      areaname:
+        description: area name
+        type: str
+        default: dunwich
+        allowed:
+          - dunwich
+          - bribie_island
+          - winterton
+    args:
+      urlpath: "https://raw.githubusercontent.com/MartinSJRogers/VEdge_Detector/main/data/{{sample_image}}.tif"
