@@ -34,11 +34,11 @@ class vedge_detector:
 
     def load_pretrained(self):
         # load json and create model
-        json_file = open(os.path.join(self.temp_dir.name,'model.json'), 'r')
+        json_file = open(os.path.join(self.temp_dir,'model.json'), 'r')
         loaded_model_json = json_file.read()
         json_file.close()
         loaded_model = model_from_json(loaded_model_json)
-        loaded_model.load_weights(os.path.join(self.temp_dir.name,'model.hdf5'))
+        loaded_model.load_weights(os.path.join(self.temp_dir,'model.hdf5'))
         return loaded_model
 
     def predict(self, image: np.ndarray) -> np.ndarray:
