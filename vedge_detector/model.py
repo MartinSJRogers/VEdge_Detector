@@ -4,6 +4,7 @@ import requests
 import tempfile
 import os
 import skimage.transform
+from PIL import Image
 
 class vedge_detector:
     def __init__(self, model_json: str="https://zenodo.org/record/6023284/files/Model_VedgeDetector.json?download=1",
@@ -38,8 +39,16 @@ class vedge_detector:
     def predict(self, image: np.ndarray) -> np.ndarray:
 
         resized = skimage.transform.resize(image, (480, 480, 3))
-        image = np.expand_dims(resized, axis=0)
+        resized = np.expand_dims(resized, axis=0)
 
-        y = self.pretrained_model.predict(image)
+        pred = self.pretrained_model.predict(resized)
 
-        return y
+        # return only the last layer
+        outArray = pred[5]
+        outArray = np.squeeze(outArray, axis=0)
+        outArray = np.squeeze(outArray, axis=2)
+        imOut = Image.fromarray(outArray)
+        imOut = imOut.resize((len(image[0]), len(image[:, 0])))
+        final = np.array(imOut)
+
+        return final
