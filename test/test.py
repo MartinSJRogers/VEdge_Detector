@@ -1,7 +1,6 @@
 import numpy as np
 from vedge_detector import vedge_detector
 import matplotlib.pyplot as plt
-from PIL import Image
 
 # load model
 model = vedge_detector()
@@ -11,19 +10,7 @@ rgb = np.random.randint(255, size=(900, 800, 3), dtype=np.uint8)
 
 pred = model.predict(rgb)
 
-print('Side outputs')
-for imgs in pred:
-    np.squeeze(imgs, axis=0)
-
-outArray = pred[5]
-outArray = np.squeeze(outArray, axis=0)
-outArray = np.squeeze(outArray, axis=2)
-imOut = Image.fromarray(outArray)
-imOut = imOut.resize((len(rgb[0]), len(rgb[:, 0])))
-final = np.array(imOut)
-print("final output")
-
-plt.imshow(final)
+plt.imshow(pred)
 plt.show()
 
 ## test real data
@@ -35,7 +22,7 @@ plt.show()
 # ds = cat.sample_image(sample_image='dunwich').to_dask()
 #
 # channels_provider = {
-#     'sentinel': ["blue", "red", "green", "extra", "NIR"],
+#     'sentinel': ["blue", "red", "green", "coastal", "NIR"],
 #     'planet': ["blue", "red", "green", "NIR"]
 # }
 #
@@ -51,18 +38,6 @@ plt.show()
 #     image_target = image_all
 #
 # pred = model.predict(image_target)
-#
-# print('Side outputs')
-# for imgs in pred:
-#     np.squeeze(imgs, axis=0)
-#
-# outArray = pred[5]
-# outArray = np.squeeze(outArray, axis=0)
-# outArray = np.squeeze(outArray, axis=2)
-# imOut = Image.fromarray(outArray)
-# imOut = imOut.resize((len(image_all[0]), len(image_all[:, 0])))
-# final = np.array(imOut)
-# print("final output")
 #
 # tensor = np.stack([image_all[..., image_channels.index('red')], image_all[..., image_channels.index('green')],
 #                    image_all[..., image_channels.index('blue')]])
