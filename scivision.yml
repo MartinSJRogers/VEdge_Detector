@@ -1,6 +1,6 @@
 sources:
   sample_image:
-    description: Sample images of two tested sites of the VEdge_Detector model in Rogers et al (2021), brisbied_island (RapidEye), winterton (Planet)
+    description: Sample images of two tested sites of the VEdge_Detector model in Rogers et al (2021), bribie_island (RapidEye), winterton (Planet)
     driver: intake_xarray.image.ImageSource
     parameters:
       areaname:
