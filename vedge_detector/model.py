@@ -6,20 +6,14 @@ import os
 import skimage.transform
 
 class vedge_detector:
-    def __init__(self, model_json: str="https://raw.githubusercontent.com/MartinSJRogers/VEdge_Detector/main/model/Model_VedgeDetector.json",
-                 model_weights: str="https://github.com/MartinSJRogers/VEdge_Detector/raw/main/model/weights_VedgeDetector.hdf5",
-                 tmp_dir: str = "./_tmp"):
+    def __init__(self, model_json: str="https://zenodo.org/record/6023284/files/Model_VedgeDetector.json?download=1",
+                 model_weights: str="https://zenodo.org/record/6023284/files/weights-VedgeDetector.hdf5?download=1"):
 
-        self.temp_dir = tmp_dir
-        os.makedirs(self.temp_dir, exist_ok=True)
-
-        #self.temp_dir = tempfile.TemporaryDirectory()
-        #self.download_file(model_json, path2save=os.path.join(self.temp_dir.name,'model.json'))
-        #self.download_file(model_weights, path2save=os.path.join(self.temp_dir.name,'model.hdf5'))
-        self.download_file(model_json, path2save=os.path.join(self.temp_dir,'model.json'))
-        self.download_file(model_weights, path2save=os.path.join(self.temp_dir,'model.hdf5'))
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.download_file(model_json, path2save=os.path.join(self.temp_dir.name,'model.json'))
+        self.download_file(model_weights, path2save=os.path.join(self.temp_dir.name,'model.hdf5'))
         self.pretrained_model = self.load_pretrained()
-        #self.temp_dir.cleanup()
+        self.temp_dir.cleanup()
 
     def download_file(self, url, path2save):
 
@@ -34,15 +28,12 @@ class vedge_detector:
 
     def load_pretrained(self):
         # load json and create model
-        json_file = open(os.path.join(self.temp_dir,'model.json'), 'r')
+        json_file = open(os.path.join(self.temp_dir.name,'model.json'), 'r')
         loaded_model_json = json_file.read()
         json_file.close()
         loaded_model = model_from_json(loaded_model_json)
-        if os.path.isfile(os.path.join(self.temp_dir,'model.hdf5')) and os.access(os.path.join(self.temp_dir,'model.hdf5'), os.R_OK):
-            loaded_model.load_weights(os.path.join(self.temp_dir,'model.hdf5'))
-            return loaded_model
-        else:
-            print("Either file is missing or is not readable")
+        loaded_model.load_weights(os.path.join(self.temp_dir.name,'model.hdf5'))
+        return loaded_model
 
     def predict(self, image: np.ndarray) -> np.ndarray:
 
