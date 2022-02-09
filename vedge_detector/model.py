@@ -6,6 +6,8 @@ import os
 import skimage.transform
 from PIL import Image
 import xarray as xr
+from skimage.exposure import equalize_hist
+import matplotlib.pyplot as plt
 
 class vedge_detector:
     def __init__(self, model_json: str="https://zenodo.org/record/6023284/files/Model_VedgeDetector.json?download=1",
@@ -36,6 +38,16 @@ class vedge_detector:
         loaded_model = model_from_json(loaded_model_json)
         loaded_model.load_weights(os.path.join(self.temp_dir.name,'model.hdf5'))
         return loaded_model
+
+    def show_output(self):
+
+        fig, ax = plt.subplots(1, 2, sharex=True, sharey=True, figsize=(10, 30))
+        axs = ax.flatten()
+        axs[0].imshow(self.rgb_equal)
+        axs[0].set_title('Satellite image (RGB)', size='xx-large')
+        axs[1].imshow(self.final)
+        axs[1].set_title('VEdge Detector Prediction', size='xx-large')
+        plt.show()
 
     def predict(self, image: np.ndarray, provider: str = "planet") -> np.ndarray:
 
@@ -73,6 +85,14 @@ class vedge_detector:
         outArray = np.squeeze(outArray, axis=2)
         imOut = Image.fromarray(outArray)
         imOut = imOut.resize((len(image[0]), len(image[:, 0])))
-        final = np.array(imOut)
+        self.final = np.array(imOut)
 
-        return final
+        # equalize
+        rgb_array = np.stack(
+            [image_all[..., image_channels.index('red')], image_all[..., image_channels.index('green')],
+             image_all[..., image_channels.index('blue')]])
+        self.rgb_equal = equalize_hist(rgb_array.swapaxes(0, 1).swapaxes(1, 2))
+
+        self.show_output()
+
+        return self.final
