@@ -4,3 +4,4 @@ pillow
 scipy
 scikit-image
 rasterio
+xarray
