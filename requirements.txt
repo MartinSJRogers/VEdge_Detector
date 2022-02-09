@@ -3,5 +3,5 @@ keras==2.3.1
 pillow
 scipy
 scikit-image
-rasterio
 xarray
+matplotlib
