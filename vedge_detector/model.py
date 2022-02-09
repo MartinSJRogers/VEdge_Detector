@@ -58,9 +58,8 @@ class vedge_detector:
 
         # subset RGB bands
         channels_provider = {
-            'sentinel': ["cirrus", "blue", "red", "green", "NIR"],
-            'planet': ["blue", "red", "green", "NIR"],
-            'rgb': ["blue", "red", "green"]
+            'RapidEye': ["blue", "red", "green", "extra", "NIR"],
+            'Planet': ["blue", "red", "green", "NIR"],
         }
 
         image_channels = channels_provider[provider]
