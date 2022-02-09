@@ -6,9 +6,10 @@ import matplotlib.pyplot as plt
 model = vedge_detector()
 
 # test random data
-rgb = np.random.randint(255, size=(900, 800, 3), dtype=np.uint8)
+rgb_planet = np.random.randint(255, size=(900, 800, 3), dtype=np.uint8)
 
-pred = model.predict(rgb)
+
+pred = model.predict(rgb_planet, 'rgb')
 
 plt.imshow(pred)
 plt.show()
