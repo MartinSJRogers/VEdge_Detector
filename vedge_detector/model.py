@@ -1,60 +1,51 @@
 from keras.models import model_from_json
 import numpy as np
 import requests
-import tempfile
 import os
 import skimage.transform
 from PIL import Image
 import xarray as xr
 from skimage.exposure import equalize_hist
 import matplotlib.pyplot as plt
+import pooch
+
 
 class vedge_detector:
-    def __init__(self, model_json: str="https://zenodo.org/record/6023284/files/Model_VedgeDetector.json?download=1",
-                 model_weights: str="https://zenodo.org/record/6023284/files/weights-VedgeDetector.hdf5?download=1"):
+    def __init__(self,
+                 model_json: dict = None,
+                 model_weights: dict = None):
 
-        self.temp_dir = tempfile.TemporaryDirectory()
-        self.download_file(model_json, path2save=os.path.join(self.temp_dir.name,'model.json'))
-        self.download_file(model_weights, path2save=os.path.join(self.temp_dir.name,'model.hdf5'))
+        if model_weights is None:
+            model_weights = dict(url="doi:10.5281/zenodo.6023284/weights-VedgeDetector.hdf5",
+                                 known_hash="md5:d26061f632fe0e246a80be7cc8bc7cce")
+        if model_json is None:
+            model_json = dict(url="doi:10.5281/zenodo.6023284/Model_VedgeDetector.json",
+                              known_hash="md5:43c92ee14a14e58375064713caa031bd")
+
+        # ---- DOWNLOAD
+        self.model_json = pooch.retrieve(url=model_json['url'], known_hash=model_json['known_hash'])
+        self.model_weights = pooch.retrieve(url=model_weights['url'], known_hash=model_weights['known_hash'])
+
+        # ---- CLASSIFIER
         self.pretrained_model = self.load_pretrained()
-        self.temp_dir.cleanup()
 
-    def download_file(self, url, path2save):
-
-        os.makedirs(os.path.dirname(path2save), exist_ok=True)
-
-        r = requests.get(url, stream=True)
-        with open(path2save, 'wb') as f:
-            for chunk in r.iter_content(chunk_size=1024):
-                if chunk:
-                    f.write(chunk)
-        f.close()
 
     def load_pretrained(self):
         # load json and create model
-        json_file = open(os.path.join(self.temp_dir.name,'model.json'), 'r')
+        json_file = open(self.model_json, 'r')
         loaded_model_json = json_file.read()
         json_file.close()
         loaded_model = model_from_json(loaded_model_json)
-        loaded_model.load_weights(os.path.join(self.temp_dir.name,'model.hdf5'))
+        loaded_model.load_weights(self.model_weights)
         return loaded_model
 
-    def show_output(self):
 
-        fig, ax = plt.subplots(1, 2, sharex=True, sharey=True, figsize=(10, 30))
-        axs = ax.flatten()
-        axs[0].imshow(self.rgb_equal)
-        axs[0].set_title('Satellite image (RGB)', size='xx-large')
-        axs[1].imshow(self.final)
-        axs[1].set_title('VEdge Detector Prediction', size='xx-large')
-        plt.show()
+    def preprocess(self):
 
-    def predict(self, image: np.ndarray, provider: str = "planet") -> np.ndarray:
-
-        image_xr = xr.DataArray(image, dims=['y', 'x', 'band'],
-                                      coords={'y': np.arange(image.shape[0]),
-                                              'x': np.arange(image.shape[1]),
-                                              'band': np.arange(image.shape[2])})
+        image_xr = xr.DataArray(self.image , dims=['y', 'x', 'band'],
+                                coords={'y': np.arange(self.image.shape[0]),
+                                        'x': np.arange(self.image.shape[1]),
+                                        'band': np.arange(self.image.shape[2])})
 
         # subset RGB bands
         channels_provider = {
@@ -62,36 +53,59 @@ class vedge_detector:
             'Planet': ["blue", "red", "green", "NIR"],
         }
 
-        image_channels = channels_provider[provider]
+        self.image_channels = channels_provider[self.provider]
         target_bands = ["red", "green", "NIR"]
 
-        image_all = image_xr.assign_coords(band_id=('band', image_channels))
-        image_all = image_all.set_index(band="band_id")
+        self.image_all = image_xr.assign_coords(band_id=('band', self.image_channels))
+        self.image_all = self.image_all.set_index(band="band_id")
 
-        if len(image_all.band) > 3:
-            image_target = image_all.sel(band=target_bands)
+        if len(self.image_all.band) > 3:
+            image_target = self.image_all.sel(band=target_bands)
         else:
-            image_target = image_all
+            image_target = self.image_all
 
         resized = skimage.transform.resize(image_target, (480, 480, 3))
-        resized = np.expand_dims(resized, axis=0)
+        self.preprocessed = np.expand_dims(resized, axis=0)
 
-        pred = self.pretrained_model.predict(resized)
 
+    def postprocess(self):
         # return only the last layer
-        outArray = pred[5]
+        outArray = self.pred[5]
         outArray = np.squeeze(outArray, axis=0)
         outArray = np.squeeze(outArray, axis=2)
         imOut = Image.fromarray(outArray)
-        imOut = imOut.resize((len(image[0]), len(image[:, 0])))
+        imOut = imOut.resize((len(self.image[0]), len(self.image[:, 0])))
         self.final = np.array(imOut)
 
         # equalize
         rgb_array = np.stack(
-            [image_all[..., image_channels.index('red')], image_all[..., image_channels.index('green')],
-             image_all[..., image_channels.index('blue')]])
+            [self.image_all[..., self.image_channels.index('red')], self.image_all[..., self.image_channels.index('green')],
+             self.image_all[..., self.image_channels.index('blue')]])
         self.rgb_equal = equalize_hist(rgb_array.swapaxes(0, 1).swapaxes(1, 2))
 
-        self.show_output() as
+
+    def show_output(self):
+
+        fig, ax = plt.subplots(1, 2, figsize=(10, 30))
+        axs = ax.flatten()
+        axs[0].imshow(self.rgb_equal)
+        axs[0].set_title('Satellite image (RGB)', size='xx-large')
+        axs[1].imshow(self.final)
+        axs[1].set_title('VEdge Detector Prediction', size='xx-large')
+        plt.show()
+
+
+    def predict(self, image: np.ndarray, provider: str = "planet") -> np.ndarray:
+
+        self.image = image
+        self.provider = provider
+
+        self.preprocess()
+
+        self.pred = self.pretrained_model.predict(self.preprocessed)
+
+        self.postprocess()
+
+        self.show_output()
 
         return self.final
