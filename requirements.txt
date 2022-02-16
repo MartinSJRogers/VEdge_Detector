@@ -5,3 +5,4 @@ scipy
 scikit-image
 xarray
 matplotlib
+pooch
