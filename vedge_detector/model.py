@@ -92,6 +92,6 @@ class vedge_detector:
              image_all[..., image_channels.index('blue')]])
         self.rgb_equal = equalize_hist(rgb_array.swapaxes(0, 1).swapaxes(1, 2))
 
-        self.show_output()
+        self.show_output() as
 
         return self.final
