@@ -1,7 +1,5 @@
 from keras.models import model_from_json
 import numpy as np
-import requests
-import os
 import skimage.transform
 from PIL import Image
 import xarray as xr
