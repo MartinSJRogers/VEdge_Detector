@@ -27,7 +27,6 @@ class vedge_detector:
         # ---- CLASSIFIER
         self.pretrained_model = self.load_pretrained()
 
-
     def load_pretrained(self):
         # load json and create model
         json_file = open(self.model_json, 'r')
@@ -37,10 +36,9 @@ class vedge_detector:
         loaded_model.load_weights(self.model_weights)
         return loaded_model
 
-
     def preprocess(self):
 
-        image_xr = xr.DataArray(self.image , dims=['y', 'x', 'band'],
+        image_xr = xr.DataArray(self.image, dims=['y', 'x', 'band'],
                                 coords={'y': np.arange(self.image.shape[0]),
                                         'x': np.arange(self.image.shape[1]),
                                         'band': np.arange(self.image.shape[2])})
@@ -65,7 +63,6 @@ class vedge_detector:
         resized = skimage.transform.resize(image_target, (480, 480, 3))
         self.preprocessed = np.expand_dims(resized, axis=0)
 
-
     def postprocess(self):
         # return only the last layer
         outArray = self.pred[5]
@@ -77,10 +74,10 @@ class vedge_detector:
 
         # equalize
         rgb_array = np.stack(
-            [self.image_all[..., self.image_channels.index('red')], self.image_all[..., self.image_channels.index('green')],
+            [self.image_all[..., self.image_channels.index('red')],
+             self.image_all[..., self.image_channels.index('green')],
              self.image_all[..., self.image_channels.index('blue')]])
         self.rgb_equal = equalize_hist(rgb_array.swapaxes(0, 1).swapaxes(1, 2))
-
 
     def show_output(self):
 
@@ -91,7 +88,6 @@ class vedge_detector:
         axs[1].imshow(self.final)
         axs[1].set_title('VEdge Detector Prediction', size='xx-large')
         plt.show()
-
 
     def predict(self, image: np.ndarray, provider: str = "planet") -> np.ndarray:
 
