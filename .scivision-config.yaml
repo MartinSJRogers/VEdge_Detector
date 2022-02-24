@@ -1,5 +1,5 @@
-name: test
-url: https://github.com/acocac/VEdge_Detector.git
+name: VEdge Detector
+url: https://github.com/MartinSJRogers/VEdge_Detector.git
 import: vedge_detector
 model: vedge_detector
 args: None
