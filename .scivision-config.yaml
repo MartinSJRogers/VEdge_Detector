@@ -1,0 +1,9 @@
+name: VEdge Detector
+url: https://github.com/MartinSJRogers/VEdge_Detector.git
+import: vedge_detector
+model: vedge_detector
+args: None
+prediction_fn:
+    call: predict
+    args:
+        X: image

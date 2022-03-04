@@ -1,0 +1,14 @@
+sources:
+  sample_image:
+    description: Sample images of two tested sites of the VEdge_Detector model in Rogers et al (2021), bribie_island (RapidEye), winterton (Planet)
+    driver: intake_xarray.image.ImageSource
+    parameters:
+      areaname:
+        description: study area
+        type: str
+        default: winterton
+        allowed:
+          - bribie_island
+          - winterton
+    args:
+      urlpath: "https://raw.githubusercontent.com/MartinSJRogers/VEdge_Detector/main/VEdge_Detector_code/{{sample_image}}.tif"
