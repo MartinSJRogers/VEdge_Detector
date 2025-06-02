@@ -11,9 +11,13 @@ Recent advances in satellite imagery availability and spatial resolution is prov
 
 The VEdge_Detector tool has been trained to differentiate between the coastal vegetation edge and other boundaries in a remote sensing image. This semantic information means the tool can discard other boundaries, including most inland field edges and other urban features. 
 
-## 3. Instructions for running the VEdge_Detector tool
+## 3. Model weights and architecture
 
-### 3.1. Setting up the python environment
+Model weights and architecture can be found here: https://zenodo.org/records/6023284
+
+## 4. Instructions for running the VEdge_Detector tool
+
+### 4.1. Setting up the python environment
 
 VEdge_Detector is best run using the **Spyder** development environment within **Anaconda**- which can be downloaded [here](https://docs.anaconda.com/anaconda/install/).
 
@@ -41,7 +45,7 @@ conda activate VEdge_Detector
 
 If these steps have worked correctly, you should see the text (VEdge_Detector) in the Anaconda Prompt window before your directory. 
 
-### 3.2. Running the code
+### 4.2. Running the code
 Start by opening **Anaconda**, which can be found by typing ‘Anaconda’ into your PC’s search tool. When Anaconda launches, in the top left-hand corner click on the 'Environments' tab (1). Within the Environments tab select the 'VEdge_Detector' environment (2). Finally, click on the 'Home' tab and then launch the Spyder development environment (3)- see picture below. 
 
 ![alt text](https://github.com/MartinSJRogers/VEdge_Detector/blob/main/Anaconda_Instructions.png) 
@@ -53,14 +57,14 @@ There are three parameters you can change in the file:
 -	`Export_Image`- This states whether you want to save the image to your directory or not. This variable can either take the value ‘yes’ or ‘no’ (all lower case). 
 -	`Output_Image_Name`- The user-defined filename for the output image. The filename must be placed in quotation marks e.g. “fileName.tif” or apostrophes e.g. ‘fileName.tif’. It is important you also include the file extension type, .tif, otherwise the file will not save. 
 
-#### 3.2.1 Additional instructions if using your own image
+#### 4.2.1 Additional instructions if using your own image
 
 If you are using your own image, ensure that it is a .tif file and refer to the **image specification** section below which outlines considerations for the image you use.
 In addition to the variable names described above, this file contains an additional parameter which you can change the value of.:
 
 - `Image type`- This variable defines what satellite the image was captured from and can take three values: **'planet'**, **'landsat'** or **'sentinel-2'** (all lower case). As discussed in the image specification section below, this tool was trained using exclusively Planet Imagery. In some circumstances, this tool can work on Landsat and Sentinel-2 imagery, although work is still ongoing to make the tool more robust at detecting the coastal vegetation edge position in these images. 
 
-#### 3.2.2 Image specification
+#### 4.2.2 Image specification
 
 The VEdge_Detector tool has been designed to perform best on:
 - Images of sandy/shingle coastlines. 
